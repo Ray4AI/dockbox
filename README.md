@@ -2,6 +2,11 @@
 
 <p align="center"><b>轻量级 Docker Web 工具面板</b> —— 左侧标签、右侧页面、托盘驻留、WebDAV 同步</p>
 
+<p align="center">
+  <a href="https://github.com/Ray4AI/dockbox">GitHub</a> ·
+  <a href="https://github.com/Ray4AI/dockbox/actions">构建产物（Actions → Artifacts）</a>
+</p>
+
 DockBox 是一个 Windows 上的极轻量"内部浏览器"，专门用来管理一堆 Docker 小工具的 Web 页面
 （Portainer、qBittorrent、Jellyfin、Grafana、Home Assistant……）。
 基于 **Tauri 2 + WebView2**，不打包浏览器内核，安装包约 10MB，空载内存占用不到 100MB。
@@ -47,9 +52,13 @@ DockBox 是一个 Windows 上的极轻量"内部浏览器"，专门用来管理�
 npm install
 npm run tauri dev      # 开发运行
 npm run tauri build    # 打包（NSIS 安装包）
+npx svelte-check       # 前端类型检查
 ```
 
-> Linux/macOS 上 `cargo check` 可用（需 webkit2gtk 等系统库），但目标平台是 Windows。
+> Linux 上可运行但多 webview 布局受 wry X11 实现限制（开发用）；**目标平台是 Windows**，
+> Windows 下每个子 webview 是独立 HWND，定位/缩放精确。
+>
+> Rust 测试：`cd src-tauri && cargo test`（WebDAV 往返 / 认证 / rev 语义等 6 个用例）。
 
 ## 构建产物
 
